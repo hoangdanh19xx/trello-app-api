@@ -18,13 +18,13 @@ const createNew = async (data) => {
 
 const update = async (id, data) => {
   try {
-    const updateData = {
+    const updatedData = {
       ...data,
       updatedAt: Date.now(),
     };
-    if (updateData._id) delete updateData._id;
+    if (updatedData._id) delete updatedData._id;
 
-    const updatedCard = await CardModel.update(id, updateData);
+    const updatedCard = await CardModel.update(id, updatedData);
 
     return updatedCard;
   } catch (error) {

@@ -26,7 +26,7 @@ const update = async (id, data) => {
       updatedAt: Date.now(),
     };
     if (updateData._id) delete updateData._id;
-    if (updateData._id) delete updateData.cards;
+    if (updateData.cards) delete updateData.cards;
 
     const updatedColumn = await ColumnModel.update(id, updateData);
 

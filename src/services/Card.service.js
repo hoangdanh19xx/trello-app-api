@@ -1,5 +1,5 @@
 import { CardModel } from "*/models/Card.model";
-import { ColumnModel } from "../models/Column.model";
+import { ColumnModel } from "*/models/Column.model";
 
 const createNew = async (data) => {
   try {
@@ -16,4 +16,20 @@ const createNew = async (data) => {
   }
 };
 
-export const CardService = { createNew };
+const update = async (id, data) => {
+  try {
+    const updateData = {
+      ...data,
+      updatedAt: Date.now(),
+    };
+    if (updateData._id) delete updateData._id;
+
+    const updatedCard = await CardModel.update(id, updateData);
+
+    return updatedCard;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const CardService = { createNew, update };

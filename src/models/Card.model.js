@@ -5,8 +5,8 @@ import { getDB } from "*/config/mongodb";
 const cardCollectionName = "cards";
 const cardCollectionSchema = Joi.object({
   boardId: Joi.string().required(),
-  columnId: Joi.string().required,
-  title: Joi.string().required().min(3).max(20),
+  columnId: Joi.string().required(),
+  title: Joi.string().required().min(3).max(20).trim(),
   cover: Joi.string().default(null),
   updatedAt: Joi.date().timestamp().default(null),
   _destroy: Joi.boolean().default(false),
@@ -33,7 +33,7 @@ const createNew = async (data) => {
 
     return result.value;
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 

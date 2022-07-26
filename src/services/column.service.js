@@ -37,7 +37,6 @@ const update = async (id, data) => {
 
     return updatedColumn;
   } catch (error) {
-    console.log(error);
     throw new Error(error);
   }
 };

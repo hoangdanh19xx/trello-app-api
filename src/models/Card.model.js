@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { ObjectId } from "mongodb";
 import { getDB } from "*/config/mongodb";
 
 // Define Board collection
@@ -20,11 +21,16 @@ const validateSchema = async (data) => {
 
 const createNew = async (data) => {
   try {
-    const value = await validateSchema(data);
+    const validatedValue = await validateSchema(data);
+    const insertValue = {
+      ...validatedValue,
+      boardId: ObjectId(validatedValue.boardId),
+      columnId: ObjectId(validatedValue.columnId),
+    };
     const options = { upsert: true, returnDocument: "after" };
     const result = await getDB()
       .collection(cardCollectionName)
-      .findOneAndUpdate(value, { $set: {} }, options);
+      .findOneAndUpdate(insertValue, { $set: {} }, options);
 
     // console.log(result.value);
     // const result = await getDB()
@@ -37,4 +43,4 @@ const createNew = async (data) => {
   }
 };
 
-export const CardModel = { createNew };
+export const CardModel = { cardCollectionName, createNew };

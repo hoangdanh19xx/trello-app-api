@@ -7,7 +7,7 @@ import { ColumnModel } from "./Column.model";
 // Define Board collection
 const boardCollectionName = "boards";
 const boardCollectionSchema = Joi.object({
-  title: Joi.string().required().min(3).max(20).trim(),
+  title: Joi.string().required().min(3).max(30).trim(),
   columnOrder: Joi.array().items(Joi.string()).default([]),
   createdAt: Joi.date().timestamp().default(Date.now()),
   updatedAt: Joi.date().timestamp().default(null),

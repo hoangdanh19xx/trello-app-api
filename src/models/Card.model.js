@@ -7,7 +7,7 @@ const cardCollectionName = "cards";
 const cardCollectionSchema = Joi.object({
   boardId: Joi.string().required(),
   columnId: Joi.string().required(),
-  title: Joi.string().required().min(3).max(20).trim(),
+  title: Joi.string().required().min(3).max(30).trim(),
   cover: Joi.string().default(null),
   updatedAt: Joi.date().timestamp().default(null),
   _destroy: Joi.boolean().default(false),
@@ -80,4 +80,4 @@ const deleteMany = async (ids) => {
   }
 };
 
-export const CardModel = { cardCollectionName, update, createNew, deleteMany };
+export const CardModel = { cardCollectionName, createNew, update, deleteMany };

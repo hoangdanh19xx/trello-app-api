@@ -46,12 +46,9 @@ const createNew = async (data) => {
 const update = async (id, data) => {
   try {
     const updateData = { ...data };
-    if (data.boardId) {
-      updateData.boardId = ObjectId(data.boardId);
-    }
-    if (data.columnId) {
-      updateData.columnId = ObjectId(data.columnId);
-    }
+    if (data.boardId) updateData.boardId = ObjectId(data.boardId);
+    if (data.columnId) updateData.columnId = ObjectId(data.columnId);
+
     const result = await getDB()
       .collection(cardCollectionName)
       .findOneAndUpdate(

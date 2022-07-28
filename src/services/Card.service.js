@@ -23,7 +23,6 @@ const update = async (id, data) => {
       updatedAt: Date.now(),
     };
     if (updateData._id) delete updateData._id;
-
     const updatedCard = await CardModel.update(id, updateData);
 
     return updatedCard;

@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import { CorsOptions } from "*/config/cors";
 import { connectDB } from "*/config/mongodb";
-import { env } from "*/config/environtment";
 import { apiV1 } from "*/routes/v1";
 
 connectDB()
@@ -23,7 +22,12 @@ const bootServer = () => {
   // Use APIs v1
   app.use("/v1", apiV1);
 
-  app.listen(env.APP_PORT, env.APP_HOST, () => {
-    console.log(`I'm running at http://${env.APP_HOST}:${env.APP_PORT}`);
+  // app.listen(env.APP_PORT, env.APP_HOST, () => {
+  //   console.log(`I'm running at http://${env.APP_HOST}:${env.APP_PORT}`);
+  // });
+
+  // support heroku deploy
+  app.listen(process.env.PORT, () => {
+    console.log(`I'm running at port: ${process.env.PORT}`);
   });
 };
